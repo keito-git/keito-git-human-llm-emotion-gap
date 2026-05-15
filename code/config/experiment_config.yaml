@@ -1,0 +1,113 @@
+# Experiment Configuration
+# Project: human_vs_ai_emotion
+# Do NOT hardcode any parameters in scripts; always reference this file.
+#
+# IMPORTANT: Before running, replace `/PATH/TO/PROJECT_ROOT` below with the
+# absolute path to your local clone of this repository (the directory that
+# contains `code/`, `data/`, `paper/`, etc.).
+# Example (run from the project root):
+#   sed -i.bak "s|/PATH/TO/PROJECT_ROOT|$(pwd)|g" code/config/experiment_config.yaml
+
+project:
+  name: "human_vs_ai_emotion"
+  target_venue: "EMNLP 2026 (ARR)"
+  deadline: "2026-05-25"
+
+paths:
+  root: "/PATH/TO/PROJECT_ROOT"
+  raw_data: "/PATH/TO/PROJECT_ROOT/data/raw"
+  processed_data: "/PATH/TO/PROJECT_ROOT/data/processed"
+  logs: "/PATH/TO/PROJECT_ROOT/data/processed/logs"
+  scripts: "/PATH/TO/PROJECT_ROOT/code"
+
+data:
+  goemotions:
+    source: "github"
+    github_url: "https://raw.githubusercontent.com/google-research/google-research/master/goemotions/data/full_dataset/"
+    # GoEmotions raw data files from GitHub (contains individual annotator labels)
+    raw_files:
+      - "goemotions_1.csv"
+      - "goemotions_2.csv"
+      - "goemotions_3.csv"
+    emotions_file: "https://raw.githubusercontent.com/google-research/google-research/master/goemotions/data/emotions.txt"
+    num_emotions: 28  # 27 categories + neutral
+    emotion_labels:
+      - "admiration"
+      - "amusement"
+      - "anger"
+      - "annoyance"
+      - "approval"
+      - "caring"
+      - "confusion"
+      - "curiosity"
+      - "desire"
+      - "disappointment"
+      - "disapproval"
+      - "disgust"
+      - "embarrassment"
+      - "excitement"
+      - "fear"
+      - "gratitude"
+      - "grief"
+      - "joy"
+      - "love"
+      - "nervousness"
+      - "optimism"
+      - "pride"
+      - "realization"
+      - "relief"
+      - "remorse"
+      - "sadness"
+      - "surprise"
+      - "neutral"
+    min_annotators_per_text: 3
+
+  emobank:
+    source: "github"
+    github_url: "https://github.com/JULIELab/EmoBank"
+    vad_scale: [1.0, 5.0]
+    vad_dimensions: ["V", "A", "D"]
+    annotation_perspective: "reader"
+    min_annotators_per_text: 3
+    core_set_size: 2000
+
+analysis:
+  random_seed: 42
+  bootstrap_n_iterations: 1000
+  confidence_level: 0.95
+
+sampling:
+  core_set_size: 2000
+  core_set_composition:
+    full_agreement: 500
+    partial_agreement: 1000
+    full_disagreement: 500
+  extended_set_size: 10000
+
+models:
+  api:
+    - name: "gpt-5.4-mini"
+      provider: "openai"
+      temperature_settings: [0.0, 0.3, 0.7, 1.0]
+      samples_per_temperature: 10
+      seed: 42
+    - name: "claude-haiku-4-5-20251001"
+      provider: "anthropic"
+      temperature_settings: [0.0, 0.3, 0.7, 1.0]
+      samples_per_temperature: 10
+      seed: 42
+  local:
+    - name: "qwen3-8b"
+      hf_model_id: "Qwen/Qwen3-8B"
+      framework: "vllm"
+      prompt_format: "system_prompt + user_prompt (chat_template)"
+      temperature_settings: [0.0, 0.3, 0.7, 1.0]
+      samples_per_temperature: 10
+      seed: 42
+    - name: "llama3.1-8b"
+      hf_model_id: "meta-llama/Llama-3.1-8B-Instruct"
+      framework: "vllm"
+      prompt_format: "system_prompt + user_prompt (chat_template)"
+      temperature_settings: [0.0, 0.3, 0.7, 1.0]
+      samples_per_temperature: 10
+      seed: 42
