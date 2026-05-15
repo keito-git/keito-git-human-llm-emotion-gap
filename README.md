@@ -4,7 +4,7 @@ Source code accompanying the paper
 
 > **LLMs Capture Emotion Labels, Not Emotion Uncertainty: Distributional
 > Analysis and Calibration of Human–LLM Judgment Gaps**
-> Keito Inoshita (Kansai University). EMNLP 2026 (under review).
+> Keito Inoshita, Xiaokang Zhou, Akira Kawai, Katsutoshi Yada.
 
 We compare four LLMs (GPT-5.4-mini, Claude Haiku 4.5, Llama 3.1 8B, Qwen3-8B)
 against human annotators on **GoEmotions** (28 categorical emotions) and
@@ -205,10 +205,8 @@ python analysis/finetuned_baseline.py --config config/experiment_config.yaml
                Distributional Analysis and Calibration of Human--LLM
                Judgment Gaps},
   author    = {Inoshita, Keito},
-  booktitle = {Proceedings of the 2026 Conference on Empirical Methods
-               in Natural Language Processing (EMNLP)},
+  booktitle = {arXiv},
   year      = {2026},
-  note      = {Under review}
 }
 ```
 
@@ -217,14 +215,6 @@ If you use the upstream datasets or models, please also cite them — see
 
 ---
 
-## Contact
-
-Keito Inoshita — Kansai University, Graduate School of Commerce
-`k845578@kansai-u.ac.jp`
-
-Issues and pull requests are welcome.
-
----
 
 ## Licence
 
