@@ -204,7 +204,7 @@ python analysis/finetuned_baseline.py --config config/experiment_config.yaml
   title     = {LLMs Capture Emotion Labels, Not Emotion Uncertainty:
                Distributional Analysis and Calibration of Human--LLM
                Judgment Gaps},
-  author    = {Inoshita, Keito},
+  author    = {Inoshita, Keito and Zhou, Xiaokang and Kawai, Akira and Yada, Katsutoshi},
   booktitle = {arXiv},
   year      = {2026},
 }
